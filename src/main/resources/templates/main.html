@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		
+		<title>首页-阳阳-前端博客</title>
+		<meta name="generator" >
+		<meta name="keywords" >
+		<meta name="description" >
+		<meta name="author" >
+		<meta name="viewport" >
+		<meta name="format-detection" >
+		<meta property="og:title" >
+		<meta property="og:type" >
+		<meta property="og:description" >
+		<meta property="og:url" >
+		<link rel="stylesheet" th:href="@{/mainpage/css/public.css}">
+		<link rel="stylesheet" th:href="@{/mainpage/css/index.css}">
+		<link rel="shortcut icon" th:href="@{/img/Myico}">
+  	<style>
+		.crx_bdwk_down_wrap {
+    top: 70%;
+    left: 0;
+    position: fixed;
+    z-index: 99999999;
+    color: #fff;
+    user-select: none;
+}
+
+    .crx_bdwk_down_wrap .crx_bdwk_down_loading {
+        background-color: #666;
+        cursor: wait;
+        width: 126px;
+        text-align: center;
+        padding: 16px 0;
+    }
+
+    .crx_bdwk_down_wrap .crx_bdwk_down_loading p {
+            font-size: 14px;
+        }
+
+    .crx_bdwk_down_wrap .crx_bdwk_down_loading small {
+            font-size: 10px;
+        }
+
+    .crx_bdwk_down_wrap .crx_bdwk_down_btn {
+        width: 126px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 14px;
+        background-color: #dd5a57;
+        position: relative;
+    }
+
+    .crx_bdwk_down_wrap .crx_bdwk_down_types {
+        display: flex;
+        text-align: center;
+        align-items: center;
+        background-color: #666;
+        font-size: 12px;
+    }
+
+    .crx_bdwk_down_wrap .crx_bdwk_down_types div {
+            position: relative;
+        }
+
+    .crx_bdwk_down_wrap .crx_bdwk_down_types div:after {
+                content: ' ';
+                height: 12px;
+                width: 1px;
+                background-color: #eee;
+                position: absolute;
+                top: 10px;
+                right: 0;
+                transform: scaleX(0.5);
+            }
+
+    .crx_bdwk_down_wrap .crx_bdwk_down_types div:last-child:after {
+                    display: none;
+                }
+
+    .crx_bdwk_down_wrap .crx_bdwk_down_types_check {
+            flex: 1;
+            color: #dd5a57;
+            padding: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+    .crx_bdwk_down_wrap .crx_bdwk_down_types_uncheck {
+            flex: 1;
+            padding: 8px;
+            cursor: pointer;
+            color: #fff;
+            font-weight: lighter;
+        }
+</style></head>
+  	<body>
+		<a name="top" id="top"></a>
+		<header th:replace="~{common/common::header}">
+		</header>
+		<div class="container">
+			<div class="content"><div class="main">
+
+
+    <div class="list" >
+		<article th:each="a:${pageBean.list}">
+                <h2><a href="https://www.xiabingbao.com/post/leetcode/leetcode-1337-new-thinking-qzei39.html" class="title" title="leetcode1337 矩阵中战斗力最弱的 K 行的一种新颖解法" rel="bookmark" th:text="${a.getTitle()}"></a></h2>
+                <p class="description" th:text="${a.getIntroduction()}">
+
+                </p >
+			<a th:href="@{/article/look/}+${a.getId()}" class="more" title="Read More"><span>➥</span>Read More</a>
+                <p class="date">
+                    <span>posted @</span><time pubdate="2021-09-14" th:text="${a.getCreate_time()}"></time><span class="comment">评论(3)</span>
+                </p>
+		</article>
+            </div>edit.html
+
+                <div class="page">
+                    <a th:href="@{/Page/ToPage(currentPage=1)}" th:if="${pageBean.pageNo != 1 }"  class="prev">首页</a>
+                    <a th:href="@{/Page/ToPage(currentPage=${(pageBean.pageNo)-1})}" th:if="${pageBean.pageNo != 1}"  class="prev">上一页</a>
+                    <span title="当前为第1页">[[${pageBean.pageNo}]] /[[${pageBean.totalPageNumber}]]</span>
+                    <a th:each="i : ${#numbers.sequence(1,pageBean.totalPageNumber)}"
+                       th:href="@{/Page/ToPage(currentPage=${i})}">[[${i}]]</a>
+                    <a th:if="${pageBean.pageNo != pageBean.totalPageNumber}"
+                       th:href="@{/Page/ToPage(currentPage=${pageBean.pageNo+1})}"  class="next">下一页</a>
+
+                    <a th:if="${pageBean.pageNo != pageBean.totalPageNumber}"
+                       th:href="@{/Page/ToPage(currentPage=${pageBean.totalPageNumber})}">尾页</a>
+
+
+
+                </div>
+            </div>
+
+<aside class="aside">                
+	<div class="about">
+        <h4 class="v-section-tit">About wenzi</h4>
+        <article class="violet-about-det">
+            <!-- <p class="my-face"><img src="/data/img/avatar.png" alt="Hello wenzi!" width="40px" height="40px" id="J_myFace_img" /></p> -->
+            <p>Back-end Engineer，后端开发工程师</p>
+            <p>目前是一名在校小学生，主要负责网站后台的搭建，运行与维护。</p>
+            <p>专注、后端技术，关注技术的体验，擅长Spring全家桶。</p>
+            <p>坚信后端工程师能够推动技术的进步，体验技术带来的美好</p>
+        </article>
+        <p class="v-more-right">
+            <a href="https://www.xiabingbao.com/about.html"><span>➥</span>More</a>
+        </p>
+    </div>
+    <div class="friendly">
+        <h4 class="v-section-tit">My Links</h4>
+        <article class="attent-det">
+            <ul>
+                <li><a href="https://github.com/wenzi0github" target="_blank" title="my github"><span>GitHub</span></a></li>
+            </ul>
+        </article>
+    </div>
+</aside>			</div><!-- content -->
+			</div> <!-- /container -->
+	<footer>
+        <p><a href="" target="_blank">友情链接</a> | © 洋洋的博客 2021  <a href="">RSS</a> | YangICP备123123123号</p>
+    </footer>
+
+    	<script th:src="@{/mainpage/js/hm.js}">
+
+		</script><script type="text/javascript" th:src="@{/mainpage/js/common.js}"></script>
+
+</body></html>

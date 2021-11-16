@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>文章</title>
+    <meta name="generator" >
+    <meta name="keywords" >
+    <meta name="description" >
+    <meta name="author" >
+    <meta name="viewport" >
+    <meta name="format-detection" >
+    <meta property="og:title" >
+    <meta property="og:type" >
+    <meta property="og:description" >
+    <meta property="og:url" >
+    <meta property="og:image" >
+    <link rel="stylesheet" th:href="@{/mainpage/css/public.css}">
+    <link rel="stylesheet" th:href="@{/mainpage/css/detail.css}">
+    <link rel="stylesheet" th:href="@{/mainpage/css/guest.css}">
+    <link rel="stylesheet" th:href="@{/css/examples/style.css}" />
+    <link rel="stylesheet" th:href="@{/css/editormd.css}" />
+    <link rel="shortcut icon" href="https://pandao.github.io/editor.md/favicon.ico" type="image/x-icon" />
+    <style>
+        .crx_bdwk_down_wrap {
+        top: 70%;
+        left: 0;
+        position: fixed;
+        z-index: 99999999;
+        color: #fff;
+        user-select: none;
+    }
+
+    .crx_bdwk_down_wrap .crx_bdwk_down_loading {
+        background-color: #666;
+        cursor: wait;
+        width: 126px;
+        text-align: center;
+        padding: 16px 0;
+    }
+
+    .crx_bdwk_down_wrap .crx_bdwk_down_loading p {
+        font-size: 14px;
+    }
+
+    .crx_bdwk_down_wrap .crx_bdwk_down_loading small {
+        font-size: 10px;
+    }
+
+    .crx_bdwk_down_wrap .crx_bdwk_down_btn {
+        width: 126px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 14px;
+        background-color: #dd5a57;
+        position: relative;
+    }
+
+    .crx_bdwk_down_wrap .crx_bdwk_down_types {
+        display: flex;
+        text-align: center;
+        align-items: center;
+        background-color: #666;
+        font-size: 12px;
+    }
+
+    .crx_bdwk_down_wrap .crx_bdwk_down_types div {
+        position: relative;
+    }
+
+    .crx_bdwk_down_wrap .crx_bdwk_down_types div:after {
+        content: ' ';
+        height: 12px;
+        width: 1px;
+        background-color: #eee;
+        position: absolute;
+        top: 10px;
+        right: 0;
+        transform: scaleX(0.5);
+    }
+
+    .crx_bdwk_down_wrap .crx_bdwk_down_types div:last-child:after {
+        display: none;
+    }
+
+    .crx_bdwk_down_wrap .crx_bdwk_down_types_check {
+        flex: 1;
+        color: #dd5a57;
+        padding: 8px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    .crx_bdwk_down_wrap .crx_bdwk_down_types_uncheck {
+        flex: 1;
+        padding: 8px;
+        cursor: pointer;
+        color: #fff;
+        font-weight: lighter;
+    }
+    </style>
+
+
+</head>
+
+
+
+<body>
+
+<header th:replace="~{common/common::header}">
+</header>
+
+
+
+<div class="container">
+    <div class="content">
+        <div class="main detail" id="app">
+
+            <h1 th:text="'题目:  '+${article.title}" style="margin-bottom: 20px;"></h1>
+            <div class="author" th:text="'作者:  '+${article.author}"  style="margin-bottom: 20px;"></div>
+            <div class="date" th:text="'创建时间:  '+${article.create_time}" style="margin-bottom: 20px;"></div>
+
+            <div style="margin-bottom:10px"></div>
+            <hr>
+
+<div id="layout">
+    <div id="test-editormd">
+        <textarea style="display:none;" th:text="${article.content}"></textarea>
+    </div>
+</div>
+
+
+        </div>
+    </div>
+</div>
+
+
+<hr>
+<div style="margin-bottom:20px"></div>
+<footer>
+    <p><a href="https://www.xiabingbao.com/flinks.html" target="_blank">友情链接</a> | © 蚊子的博客 2021  <a href="https://www.xiabingbao.com/atom.xml">RSS</a> | 京ICP备16039464号</p>
+</footer>
+
+
+<script th:src="@{/mainpage/js/hm.js}"></script>
+<script type="text/javascript" charset="UTF-8" th:src="@{/mainpage/js/highlight.min.js}"></script>
+<script type="text/javascript" charset="UTF-8" th:src="@{/mainpage/js/detail.js}"></script>
+<script type="text/javascript" charset="UTF-8" th:src="@{/mainpage/js/comments.js}"></script>
+<script type="text/javascript" th:src="@{/mainpage/js/common.js}"></script>
+<script th:src="@{/js/examples/jquery.min.js}"></script>
+<script th:src="@{/lib/marked.min.js}"></script>
+<script th:src="@{/lib/prettify.min.js}"></script>
+<script th:src="@{/lib/raphael.min.js}"></script>
+<script th:src="@{/lib/underscore.min.js}"></script>
+<script th:src="@{/lib/sequence-diagram.min.js}"></script>
+<script th:src="@{/lib/flowchart.min.js}"></script>
+<script th:src="@{/lib/jquery.flowchart.min.js}"></script>
+<script th:src="@{/js/editormd.min.js}"></script>
+<script type="text/javascript">
+
+    var testEditor;
+
+    $(function () {
+        testEditor = editormd.markdownToHTML("test-editormd", {
+            width: "90%",
+            height: 700,
+            path: "../lib/",
+            preview: true,
+            watch: true,
+            editor: false,
+        })
+    })
+
+</script>
+
+
+
+
+
+</body>
+</html>

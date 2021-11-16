@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <title>Simple example - Editor.md examples</title>
+    <link rel="stylesheet" th:href="@{/css/examples/style.css}" />
+    <link rel="stylesheet" th:href="@{/css/editormd.css}" />
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+
+    <link rel="stylesheet" th:href="@{/mainpage/css/public.css}">
+    <link rel="stylesheet" th:href="@{/mainpage/css/detail.css}">
+    <link rel="stylesheet" th:href="@{/mainpage/css/guest.css}">
+    <link href="https://pandao.github.io/editor.md/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+</head>
+<body>
+
+<header th:replace="~{common/common::header}">
+</header>
+
+
+<div id="">
+    <form name="mdEditorForm" th:action="@{/back/Insert}">
+
+
+        <div style="margin-left:650px; margin-top:100px" >
+            <lable>作者</lable>
+            <input type="text" class="" name="author">
+        </div>
+
+        <div style="margin-left:650px; margin-top:50px;">
+            <lable>标题</lable>
+            <input type="text" class="" name="title">
+        </div>
+
+        <div style="margin-left:650px;margin-top:50px; ">
+            <lable>简介</lable>
+            <input type="text" class="" placeholder="请不要超过10个字符"  name="introduction">
+        </div>
+
+
+        <div style="margin-left:650px;margin-top: 50px; margin-bottom: 30px; ">
+            <lable>主题</lable>
+            <input type="text" class="" placeholder="请不要超过10个字符"  name="themes">
+        </div>
+
+
+        <div id="test-editormd">
+            <textarea name="content" style="display:none;"></textarea>
+        </div>
+
+        <button type="submit" style="margin-left:730px;" class="btn btn-primary">添加</button>
+
+    </form>
+
+</div>
+<script th:src="@{/js/examples/jquery.min.js}"></script>
+<script th:src="@{/js/editormd.min.js}"></script>
+<script type="text/javascript">
+    var testEditor;
+
+    $(function() {
+        testEditor = editormd("test-editormd", {
+            width   : "90%",
+            height  : 640,
+            syncScrolling : "single",
+            path    : "../lib/",
+            imageUpload : true,
+            imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+            imageUploadURL : "/file/upload",
+            onload : function() {
+                console.log('onload', this);
+            },
+            toolbarIcons : function () {
+                return ["undo","redo","|","bold","del","italic","quote","ucwords","uppercase","lowercase","|","h1","h2","h3","h4","h5","h6","|","list-ul","list-ol","hr","|","link","reference-link","image","code","preformatted-text","code-block","table","datetime","emoji","html-entities","pagebreak","|","goto-line","watch","preview","fullscreen","clear","search","|","help","info", "||", "publish"];
+            },
+            
+            toolbarIconTexts: {
+                publish: "<span bgcolor='gray'>发布</span>"
+            },
+            
+            toolbarHandlers : {
+                publish: function (cm, icon, cursor, selection) {
+                    mdEditorForm.method = "post";
+                    mdEditorForm.action = "/article/publish";//提交至服务器的路径
+                    mdEditorForm.submit();
+
+                }
+            }
+        });
+
+
+
+        /*
+        // or
+        testEditor = editormd({
+            id      : "test-editormd",
+            width   : "90%",
+            height  : 640,
+            path    : "../lib/"
+        });
+        */
+    });
+</script>
+</body>
+</html>
